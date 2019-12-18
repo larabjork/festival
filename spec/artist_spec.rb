@@ -47,5 +47,14 @@ describe 'Artist' do
   end
 end
 
+describe('#artists') do
+it("returns an album's songs") do
+  stage2 = Stage.new(nil, "Poplar").save
+  artist = Artist.new(nil, "Cake", stage2.id).save
+  artist2 = Artist.new(nil, "California", stage2.id).save
+  expect(stage2.artists).to(eq([artist, artist2]))
+end
+end
+
 
 end
