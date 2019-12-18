@@ -2,11 +2,22 @@ class Stage
   attr_reader :id
   attr_accessor :stage_name
 
-  def initialize(id, stage_name)
+  def initialize(id = nil, stage_name)
     @id = id || @@total_rows += 1
     @stage_name = stage_name
   end
 
+  def save
+    @@stages[self.id] = self
+  end
+
+  def update(stage_name)
+    @stage_name = stage_name
+  end
+
+  def delete
+    @@stages.delete(@id)
+  end
 
 
 
@@ -22,5 +33,6 @@ class Stage
   def self.all
     @@stages.values
   end
+
 
 end
