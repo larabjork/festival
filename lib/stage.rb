@@ -38,5 +38,8 @@ end
     @@stages.values
   end
 
+  def self.find(id)
+    @@stages[id]
+  end
 
 end
