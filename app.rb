@@ -25,12 +25,12 @@ end
 get('/stages/new') { erb(:stages_new) }
 
 get('/stages/:id') do
-    @stage = Stage.search(:id, params[:id])
+    @stage = Stage.find(params[:id])
     erb(:stage)
 end
 
 get('/stages/:id/edit') do
-  @stage = Stage.find(:id, params[:id])
+  @stage = Stage.find(params[:id])
   erb(:stage_edit)
 end
 
@@ -46,6 +46,32 @@ delete('/stages/:id') do
     @stage.delete
     @stages = Stage.all
     erb(:stages)
+end
+
+get('/stages/:id/artists/:artist_name') do
+  @artist = Artist.find(params[:artist_name])
+  erb(:artist_name)
+end
+
+post('/stages/:id/artists') do
+  @stage = Stage.find(params[:id].to_i())
+  artist = Artist.new(params[:artist_name], @stage.id, nil)
+  artist.save()
+  erb(:stage)
+end
+
+patch('/stages/:id/artists/:artist_name') do
+  @stage = Stage.find(params[:id].to_i())
+  artist = Artist.find(params[:artist_name])
+  artist.update(params[:artist_name], @stage.id)
+  erb(:stage)
+end
+
+delete('/stages/:id/artists/:artist_name') do
+  artist = Artist.find(params[:artist_name])
+  artist.delete
+  @stage = Stage.find(params[:id].to_i())
+  erb(:stage)
 end
 
 

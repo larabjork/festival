@@ -1,0 +1,27 @@
+<h1>Woodland Music Festival</h1>
+
+<h3>Stages</h3>
+
+<% if @stages.any? %>
+<table style="width:100%">
+  <tr>
+    <th>Stage Name</th>
+  </tr>
+  <% @stages.each do |stage| %>
+  <tr>
+    <td><a href="/stages/<%= stage.id %>"><%= stage.stage_name %></a></td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+<p>There are currently no stages to display.</p>
+<% end %>
+<a href="/stages/new">Add a new stage</a>
+
+<form action="/stages">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Go!</button>
+</form>
