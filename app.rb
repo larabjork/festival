@@ -24,6 +24,11 @@ end
 
 get('/stages/new') { erb(:stages_new) }
 
+get('/stages/:id') do
+    @stage = Stage.search(:id, params[:id])
+    erb(:stage)
+end
+
 get('/stages/:id/edit') do
   @stage = Stage.find(:id, params[:id])
   erb(:stage_edit)
